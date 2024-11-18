@@ -1,0 +1,48 @@
+import customtkinter as ctk 
+
+
+root = ctk.CTk()
+root.geometry(f"800x600")
+
+menu_options= ["Start", "Close"]
+selected_index=0
+main_frame= ctk.CTkFrame(root, width=800, height=600,fg_color="gray20")
+main_frame.grid()
+main_frame.grid_propagate(False)
+def on_key_press(event):
+    global selected_index
+    if event.keysym== "Up":
+        selected_index = (selected_index-1)% len(menu_options)
+    elif event.keysym== "Down":
+        selected_index = (selected_index+1)% len(menu_options)
+    elif event.keysym=="Return":
+        select_option()
+    update_selection()
+def update_selection():
+    for i, option in enumerate(menu_options):
+        if i == selected_index:
+            menu_labels[i].configure(bg_color="blue", text_color="snow") 
+        else:
+            menu_labels[i].configure(bg_color="snow", text_color="gray5")
+            
+menu_labels= []
+for option in menu_options:
+    menu_label= ctk.CTkLabel(main_frame, text= option, bg_color="snow", text_color="gray5")
+    menu_label.grid()
+    menu_labels.append(menu_label)
+    
+
+def select_option():
+    print()
+    
+
+    
+
+root.bind("<Up>", on_key_press)
+root.bind("<Down>", on_key_press)
+root.bind("<Return>", on_key_press)
+
+root.mainloop()
+
+
+
